@@ -1,0 +1,44 @@
+name: Build Book & Deploy to CF Pages
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup | mdBook
+        uses: extractions/setup-crate@v1
+        with:
+          owner: rust-lang
+          name: mdBook
+
+      - name: Build | Book
+        run: mdbook build
+      
+      - name: Upload | Book
+        uses: actions/upload-artifact@v3
+        with:
+          name: book
+          path: book
+    
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Setup | Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: book
+          path: book
+      
+      - name: Publish | Cloudflare Pages
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 3636docs
+          directory: book
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
