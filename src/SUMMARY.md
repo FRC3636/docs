@@ -1,5 +1,7 @@
 # Summary
 
+[Introduction](README.md)
+
 - [Thinking in Java](./java/README.md)
 - [Using WPILib](./wpilib/README.md)
     - [The Development Environment](./wpilib/development-environment.md)
