@@ -1,0 +1,6 @@
+[book]
+authors = ["Max Niederman"]
+language = "en"
+multilingual = false
+src = "src"
+title = "3636 Programming"
