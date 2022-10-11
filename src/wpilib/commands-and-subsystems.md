@@ -99,10 +99,10 @@ public interface Command {
 An example command using the `Drivetrain` subsystem described above might look like this:
 
 ```java
-public class AccelerateMeter implements Command {
+public class DriveOneMeter implements Command {
     private final Drivetrain drivetrain;
 
-    public AccelerateMeter(Drivetrain drivetrain) {
+    public DriveOneMeter(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
     }
 
@@ -192,7 +192,7 @@ but it's not ideal for robots.
 We want our robot to be able to
 do many things at once.
 To do this,
-WPILib uses a [scheduler](https://en.wikipedia.org/wiki/Scheduling_(computing)) to enable [concurrency](https://en.wikipedia.org/wiki/Concurrency_(computer_science)).
+WPILib uses a scheduler to enable concurrency.
 Let's say that the scheduler
 is executing two commands simultaneously: A and B.
 It loop and alternates between calling
@@ -206,6 +206,13 @@ into parts.
 First, he can lay out the bread for all the sandwiches in turn.
 Then, he can add mayonnaise to all of them, and so on.
 
+In the next chapter,
+you'll learn how to
+use commands and subsystems
+to create a basic program
+for your Romi.
+
 ## Resources
 
 - [WPILib's Official Documentation on Command-Based Programming](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html)
+- 
