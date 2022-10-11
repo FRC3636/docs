@@ -7,3 +7,4 @@
     - [The Development Environment](./wpilib/development-environment.md)
     - [Creating a Project](./wpilib/creating-a-project.md)
     - [Commands and Subsystems](./wpilib/commands-and-subsystems.md)
+- [Projects](./projects/README.md)

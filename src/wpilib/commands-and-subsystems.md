@@ -10,6 +10,9 @@ Command-based programming uses
 three main abstractions:
 *subsystems*, *commands*, and *inputs*.
 
+// I watched this video when first learning how to use WPILIB and it helped me a lot
+[Youtube video on command based programming](https://www.youtube.com/watch?v=64hPDvphcfA&ab_channel=ManningRobotics)
+
 ## Subsystems
 
 A subsystem encapsulates related lower-level robot mechanisms
@@ -73,6 +76,8 @@ unexpected and unwanted behavior.
 
 In WPILib, commands implement the [`Command`](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/Command.html) interface, which looks something like this:
 
+// Probably don't need to show what the command class looks like. IDK if it will be helpful
+
 ```java
 public interface Command {
     // this method is called periodically while the command is running
@@ -97,6 +102,7 @@ public interface Command {
 ```
 
 An example command using the `Drivetrain` subsystem described above might look like this:
+//I think AccelerateMeter as a command is a bit confusing and also having a finished condition is helpful but might make it more confusing
 
 ```java
 public class AccelerateMeter implements Command {
@@ -140,6 +146,9 @@ public class AccelerateMeter implements Command {
 
 ## Inputs
 
+// This is a very confusing paragraph. 
+// I think this entire section would be difficult to read if you didn't have a really good grasp on programming
+
 Inputs are the way that the program
 receives information from the outside world.
 In imperative programming,
@@ -167,6 +176,7 @@ There are also two important types representing imperative (polled) inputs:
 and [`AnalogInput`](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/AnalogInput.html). These are typically used directly in the periodic methods of subsystems or commands.
 
 ## The Scheduler and Concurrency
+// Might be better to tell them that it works and not how / why it works. I think that just knowing that the code is run every update is probably good enough
 
 If you read the pseudocode above closely,
 you may have noticed
@@ -174,6 +184,8 @@ references to "the scheduler."
 If you don't understand concurrency,
 it might seem rather mystical, so
 I hope to demystify it a bit here.
+
+// IDK if the sandwitch metaphor is very helpful
 
 Most likely,
 all the programs you've written so far have been synchronous.
