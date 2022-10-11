@@ -99,10 +99,10 @@ public interface Command {
 An example command using the `Drivetrain` subsystem described above might look like this:
 
 ```java
-public class AccelerateMeter implements Command {
+public class DriveOneMeter implements Command {
     private final Drivetrain drivetrain;
 
-    public AccelerateMeter(Drivetrain drivetrain) {
+    public DriveOneMeter(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
     }
 
@@ -144,8 +144,9 @@ Inputs are the way that the program
 receives information from the outside world.
 In imperative programming,
 the typical way to do this is to
-poll the input state in a periodic method,
-but in command-based programming,
+repeatedly read from a sensor in a periodic method;
+this method is called polling.
+But in command-based programming,
 we specify the commands that should run
 as a result of inputs *declaratively*
 in a single file.
@@ -209,3 +210,4 @@ Then, he can add mayonnaise to all of them, and so on.
 ## Resources
 
 - [WPILib's Official Documentation on Command-Based Programming](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html)
+- [Manning Robotics' FRC Java tutorial](https://www.youtube.com/watch?v=64hPDvphcfA&ab_channel=ManningRobotics)
