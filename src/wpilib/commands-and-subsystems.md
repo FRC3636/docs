@@ -23,7 +23,7 @@ In WPILib, subsystems implement the [`Subsystem`](https://first.wpi.edu/wpilib/a
 
 ```java
 public interface Subsystem {
-    // this method is called periodically by the scheduler
+    // this method is called regularly by the scheduler
     void periodic();
 }
 ```
