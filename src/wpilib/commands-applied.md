@@ -96,3 +96,95 @@ public void configureButtonBindings() {
 
 Now, if you run the robot code,
 you should see the message "Hello, World!" printed to the console.
+
+Now that your command is running,
+you can add some code to it
+to actually drive the robot.
+
+First, you'll need to add a subsystem to the command.
+This is done by creating
+a member variable to hold the subsystem,
+a constructor parameter to initialize it,
+and adding it to the requirements returned by `getRequirements`:
+
+```java
+public class ArcadeDriveCommand implements Command {
+    private final RomiDrivetrain drivetrain;
+
+    public ArcadeDriveCommand(RomiDrivetrain drivetrain) {
+        this.drivetrain = drivetrain;
+    }
+
+    @Override
+    public Set<Subsystem> getRequirements() {
+        return Set.of(drivetrain);
+    }
+}
+```
+
+Since you need a way to get the speed and rotation values from the controller,
+you should add two member variables which "supply" those values.
+It would also be possible to read the values directly in the command,
+but this spreads out control logic across multiple classes,
+which is not ideal.
+Instead, the control method will be defined
+in the `RobotContainer` class when the command is constructed.
+
+`commands/ArcadeDriveCommand.java`:
+
+```java
+private final FloatSupplier speed;
+private final FloatSupplier rotation;
+
+public ArcadeDriveCommand(
+    RomiDrivetrain drivetrain,
+    FloatSupplier speed,
+    FloatSupplier rotation
+) {
+    this.drivetrain = drivetrain;
+    this.speed = speed;
+    this.rotation = rotation;
+}
+```
+
+`RobotContainer.java`:
+
+```java
+public class RobotContainer {
+    private final RomiDrivetrain romiDrivetrain = new RomiDrivetrain();
+
+    private final Joystick joystick = new Joystick(0);
+
+    public RobotContainer() {
+        configureButtonBindings();
+    }
+
+    private void configureButtonBindings() {
+        romiDrivetrain.setDefaultCommand(
+            new ArcadeDriveCommand(
+                romiDrivetrain,
+                () -> (float) joystick.getY(),
+                () -> (float) joystick.getX()));
+    }
+
+    public Command getAutonomousCommand() {
+        return null;
+    }
+}
+```
+
+_Note: if you're using a different kind of controller,
+you'll need to use different class(es) and methods to read the relevant values._
+
+Then, you can use the drivetrain's methods
+inside the command's `execute` method,
+which is called repeatedly while the command is running:
+
+```java
+@Override
+public void execute() {
+    drivetrain.arcadeDrive(speed.getAsFloat(), rotation.getAsFloat());
+}
+```
+
+Now, run the robot and you should be able to drive it around!
