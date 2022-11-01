@@ -188,3 +188,22 @@ public void execute() {
 ```
 
 Now, run the robot and you should be able to drive it around!
+
+## Creating a Subsystem
+
+Next, you'll create
+a new subsystem to represent the Romi's LEDs.
+First, create the file `subsystems/LightSubsystem.java`
+and scaffold out a class implementing `Subsystem`:
+
+```java
+public class LightSubsystem implements Subsystem {
+    public LightSubsystem() {
+
+    }
+
+    void periodic() {
+
+    }
+}
+```
