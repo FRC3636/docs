@@ -7,8 +7,8 @@ The 3636 Auto Language ("autolang" or "drivelang") is a custom-made, text-based 
 ## Example program
 
 ```js
-intake cube 2;
-score cube 1 low cone_right;
+intake cone 2;
+score cone 1 low cone_right;
 wait 5;
 intake cone 3;
 score cone 1 mid cone_right;
@@ -20,12 +20,56 @@ balance;
 
 Instructions for the robot are called commands and are separated by semicolons (`;`). During the autonomous period, the robot completes each command, one after the other, from start to finish.
 
-- intake (Piece) (Grid) [Pathing Mode]
-- score (Piece) (Grid) (node level) (column number)
+- intake (Piece) (Pre-placed Game Piece) [Pathing Mode]
+- score (Piece) (Grid) (Node Level) (Node Column)
 - balance
 - leave_community
 - wait (Time)
 - drop (Drop Position)
+
+### Intake
+
+This command makes the robot pick up the specified pre-placed game piece. Examples:
+
+```js
+intake cone 1 ignore_obstacles;
+intake cube 2;
+```
+
+### Score
+
+This command makes the robot score the currently loaded game piece at a certain grid, node level, and column. Examples:
+
+```js
+score cube 1 low cube_left;
+score cone closest mid cone;
+```
+
+### Balance
+
+Makes the robot balance on the charge station.
+
+### Leave Community
+
+Makes the robot leave the community to earn a small amount of points.
+
+### Wait
+
+Makes the robot wait a certain number of seconds. Example:
+
+```js
+wait 5.1;
+```
+
+### Drop
+
+Makes the robot drop its game piece in a preset position, indicated by the number following the command. The lowest valid number is `1`. Example:
+
+```js
+drop 1;
+...
+drop 2;
+```
 
 ## Keywords and values
 
@@ -41,19 +85,23 @@ A game piece. There are two options: `cube` and `cone`.
 
 ### Node Level
 
-TODO: which values?
+The height at which to score a game piece. There are three options: `low`, `mid`, and `high`.
 
-### Column Value
+### Node Column
 
-TODO: which values?
+The horizontal position to score at. There are three options: `cone_left`, `cube`, and `cone_right`. When not using the `low` node level, these columns should only be used with the game piece in their name.
 
 ### Grid
 
-`1`, `2`, or `3`, or `closest`. When scoring, refers to which grid (left/mid/right) to score at.
+`1`, `2`, or `3`, or `closest`. When scoring, refers to which grid to score at.
+
+### Pre-placed Game Piece
+
+Configures the robot to pick up a certain pre-placed game piece. When the robot on the blue team side, this is counted from left to right. When the robot is on the red team side, this is counted from right to left. The options are `1`, `2`, or `3`, `4`, or `closest`.
 
 ### Drop Position
 
-Controls where the robot drops a game piece. There are [several](https://github.com/FRC3636/frc-2023/blob/94c680b3bd4396697c61f67183e001fc52389ddc/src/main/java/frc/robot/Constants.java#L312) preset positions where the robot can drop, and setting this to the index of the desired drop position will make the robot drop the game piece at that position.
+A number that controls where the robot drops a game piece. There are [several](https://github.com/FRC3636/frc-2023/blob/94c680b3bd4396697c61f67183e001fc52389ddc/src/main/java/frc/robot/Constants.java#L312) preset positions where the robot can drop, and setting this to the index of the desired drop position will make the robot drop the game piece at that position.
 
 ### Pathing Mode
 
@@ -63,7 +111,7 @@ Can be `avoid_obstacles` to drive around them or `ignore_obstacles` to act as if
 
 ### Time
 
-An unsigned floating point number that controls how long the robot should wait, measured in seconds.
+A positive decimal point number that controls how long the robot should wait, measured in seconds.
 
 ## Scratch-like auto builder
 
