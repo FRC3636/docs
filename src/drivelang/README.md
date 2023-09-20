@@ -1,5 +1,7 @@
 # Drive Auto Programming Language
 
+[Source Code](https://github.com/FRC3636/frc-2023/blob/main/src/main/java/frc/robot/utils/AutoLanguage.java) ([permalink](https://github.com/FRC3636/frc-2023/blob/94c680b3bd4396697c61f67183e001fc52389ddc/src/main/java/frc/robot/utils/AutoLanguage.java))
+
 The 3636 Auto Language ("autolang" or "drivelang") is a custom-made, text-based way to set what a robot does during the Autonomous period. Programs can be entered into a text field on the drive station Shuffleboard dashboard. The version described in this document was designed for the 2023 FRC robotics season.
 
 ## Example program
@@ -18,34 +20,50 @@ balance;
 
 Instructions for the robot are called commands and are separated by semicolons (`;`). During the autonomous period, the robot completes each command, one after the other, from start to finish.
 
-- intake (piece) (number) [avoid_obstacles || ignore_obstacles ]
-- score (piece) (grid number) (node level) (column number)
+- intake (Piece) (Grid) [Pathing Mode]
+- score (Piece) (Grid) (node level) (column number)
 - balance
 - leave_community
-- wait (time in seconds)
-- drop
+- wait (Time)
+- drop (Drop Position)
 
-## Keywords
+## Keywords and values
 
-Keywords are used in conjunction with statements to choose where, when, and how the robot should do the action. They appear after the first word of a statement, in varying numbers and order. Keywords are seperated by spaces.
+Keywords are used in conjunction with statements to configure where, when, and how the robot should do an action. They appear after the first word of a statement, in varying numbers and order. Keywords are separated by spaces.
+
+```js
+some_command keyword1 125;
+```
 
 ### Piece
 
 A game piece. There are two options: `cube` and `cone`.
 
-### Number
+### Node Level
 
-A positive, whole number. Example: `1`, `5`, `0`
+TODO: which values?
 
-TODO: what does this mean in the intake command? (left, mid, right)
+### Column Value
 
-### Obstacle avoidance
+TODO: which values?
 
-Whether the robot should consider obstacles when driving to its new location. Can be ommitted.
+### Grid
 
-TODO: what is the default?
+`1`, `2`, or `3`, or `closest`. When scoring, refers to which grid (left/mid/right) to score at.
+
+### Drop Position
+
+Controls where the robot drops a game piece. There are [several](https://github.com/FRC3636/frc-2023/blob/94c680b3bd4396697c61f67183e001fc52389ddc/src/main/java/frc/robot/Constants.java#L312) preset positions where the robot can drop, and setting this to the index of the desired drop position will make the robot drop the game piece at that position.
+
+### Pathing Mode
+
+Whether the robot should consider obstacles when driving to its new location. Can be omitted. The default value is `avoid_obstacles`.
 
 Can be `avoid_obstacles` to drive around them or `ignore_obstacles` to act as if they're not there.
+
+### Time
+
+An unsigned floating point number that controls how long the robot should wait, measured in seconds.
 
 ## Scratch-like auto builder
 
