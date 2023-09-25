@@ -71,6 +71,23 @@ drop 1;
 drop 2;
 ```
 
+### Shoot (WIP)
+
+Currently a work-in-progress but this will tell the the robot to shoot a cube (if held) on the open side of the grid or in place if specified. 
+
+Shoot in place:
+
+```js
+shoot true;
+```
+
+Shoot on open side:
+
+```js
+shoot;
+```
+
+
 ## Keywords and values
 
 Keywords are used in conjunction with statements to configure where, when, and how the robot should do an action. They appear after the first word of a statement, in varying numbers and order. Keywords are separated by spaces.
