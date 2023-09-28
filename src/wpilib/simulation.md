@@ -1,6 +1,6 @@
-# Simulator
+# Simulation
 
-The WPILIB simulator lets you control a (fake) robot without expensive real hardware. It's built into the project and runs the robot's code directly on your computer (rather than on the robot's RoboRIO computer).
+The WPILib simulator lets you control a (fake) robot without expensive real hardware. It's built into the project and runs the robot's code directly on your computer (rather than on the robot's RoboRIO computer).
 
 ## Starting the simulator
 
@@ -8,7 +8,21 @@ After the robot's code is downloaded, a simulator can be opened by pressing Ctrl
 
 ## Setting up controls
 
-Enable keyboard control by dragging "Keyboard 0" onto the "Joystick 0" slot and "Keyboard 1" to "Joystick 1". "Joystick 0" means you're controlling the robot's left/right/up/down movement and "Keyboard 0" means you're using WASD to do so. "Joystick 1" means you're controlling the robot's rotation and "Keyboard 1" means you're using J and L to do so. In a real competition, these would be real joysticks, but the simulator lets you use a keyboard for ease of use.
+Enable keyboard control by dragging "Keyboard 0" onto the "Joystick 0" slot and "Keyboard 1" to "Joystick 1".
+
+### Joysticks
+
+The robot is controlled using joystick input. In a real competition, these would be physical joysticks, but the simulator lets you use a keyboard to make it easier to test.
+
+- **Joystick 0** controls the robot's left/right/up/down movement.
+- **Joystick 1** controls the robot's rotation.
+
+### Keyboards
+
+Keyboard controls in the simulator are fake joysticks that correspond to certain key combinations.
+
+- **Keyboard 0** means you're using WASD
+- **Keyboard 1** means you're using J and L
 
 ## Seeing a 2D field
 

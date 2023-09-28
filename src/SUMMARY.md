@@ -8,5 +8,5 @@
   - [Creating a Project](./wpilib/creating-a-project.md)
   - [Commands and Subsystems](./wpilib/commands-and-subsystems.md)
   - [Applied Command-Based Programming](./wpilib/commands-applied.md)
-  - [Simulator](./wpilib/simulator.md)
+  - [Simulation](./wpilib/simulation.md)
 - [Auto Language](./drivelang/README.md)
