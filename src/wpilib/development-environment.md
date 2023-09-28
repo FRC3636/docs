@@ -9,15 +9,10 @@ See also: [WPILib's guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/
 
 ## Installing WPILib
 
-WPILib provides installers
-for Windows, macOS, and Linux.
+WPILib is available on Windows, macOS, and Linux.
 
-First,
-you'll need to download
-the latest release of WPILib
-from GitHub Releases.
-You can follow [this link](https://github.com/wpilibsuite/allwpilib/releases/latest)
-and then scroll down until you find the "Assets" section.
+Download the installer from [this link](https://github.com/wpilibsuite/allwpilib/releases/latest)
+(under the "Assets" section).
 
 After you download and run the installer,
 it will prompt you to choose to install "tools only" or "everything."
@@ -26,7 +21,11 @@ you should choose "everything"
 and select "download for this computer only"
 when it prompts you to install VS Code.
 
-## Setting up Your Editor (optional)
+## Downloading the code
+
+Head over to our [GitHub organization](https://github.com/frc3636) and either use VSCode's ["Git: Clone"](https://git-scm.com/downloads) command to download the latest code or download it as a ZIP if you don't intend to change.
+
+## Using an alternative editor (optional)
 
 If you chose not to install VS Code with the WPILib installer,
 you'll probably want to set up your editor of choice
