@@ -4,7 +4,7 @@ The WPILib simulator lets you control a (fake) robot without expensive real hard
 
 ## Starting the simulator
 
-After the robot's code is downloaded, a simulator can be opened by pressing Ctrl-Shift-P and selecting the "Simulate robot code" option. The robot's state can be controlled in the upper right hand corner. Disabled means it will not accept input, autonomous means it will run a pre-programmed path, and teleoperated means it can be controlled by a driver.
+After the robot's code is downloaded, a simulator can be opened by pressing Ctrl-Shift-P and selecting the "Simulate robot code" option. The [robot's state](robot-states.md) can be controlled in the upper right hand corner.
 
 ## Setting up controls
 
