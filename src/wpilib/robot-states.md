@@ -1,6 +1,6 @@
 # Robot States
 
-Robots programmed with WPILib can be in one of four states:
+Robots programmed with WPILib can be in one of four modes of operation, called states:
 
 - **Disabled**:
   The robot does not accept user input and shouldn't move mechanisms.
@@ -16,6 +16,7 @@ Robots programmed with WPILib can be in one of four states:
 - **Emergency Stopped (E-Stopped)**:
   This is a special state which is identical to the disabled state,
   except that the bot cannot be re-enabled after it has been emergency stopped.
+  This state is triggered by pressing the spacebar in FRC Driver Station.
 
 Here's a table comparing each state:
 
