@@ -114,7 +114,7 @@ The horizontal position to score at. There are three options: `cone_left`, `cube
 
 ### Pre-placed Game Piece
 
-Configures the robot to pick up a certain pre-placed game piece. When the robot on the blue team side, this is counted from left to right. When the robot is on the red team side, this is counted from right to left. The options are `1`, `2`, or `3`, `4`, or `closest`.
+Configures the robot to pick up a certain pre-placed game piece. When the robot on the blue team side, this is counted from left to right. When the robot is on the red team side, this is counted from right to left. The options are `1`, `2`, `3`, or `4`. `closest` is another option but is unlikely to work.
 
 ### Drop Position
 
