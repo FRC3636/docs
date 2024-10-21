@@ -1,6 +1,6 @@
 name: Build Book & Deploy to CF Pages
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   build:
@@ -37,11 +37,9 @@ jobs:
           name: book
           path: book
       
-      - name: Publish | Cloudflare Pages
-        uses: cloudflare/pages-action@1
+      - name: Deploy | Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 3636docs
-          directory: book
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy book --project-name=3636docs
