@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup | Download Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: book
           path: book
