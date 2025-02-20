@@ -1,4 +1,4 @@
-# SysID
+# SysID Tutorial
 
 SysID (short for System Identification) is an app that is used to predict PID and Feedforward controller gains. It works by analyzing the velocity and position changes of a motor as a voltage is applied to it. It uses this date to estimate the theoretical optimal constants.
 
@@ -18,7 +18,7 @@ interface ElevatorIO {
 Implement it in each version of the I/O layer. For example, when using a TalonFX, the `VoltageOut` control request can be used. It's important ensure that when running SysID routines, the same method of motor control is used as when running the subsystem for real (for example, if using FOC for extra power, it should be enabled both during SysID and real motor usage).
 
 ```kotlin
-class ElevatorIOTalon {
+class ElevatorIOTalon : ElevatorIO {
     private val motor = TalonFX().apply {
         // ... configuration ...
     }
@@ -96,4 +96,64 @@ The next step is to download the log data so that SysID can analyze it.
 
 When not using TalonFX, SysID logs must be downloaded onto your laptop using the RoboRIO Data Log Tool (downloads available online).
 
-Otherwise, use Phoenix Tuner X (downloads also available online) and follow the instructions on this page <https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tools/log-extractor.html>.
+Otherwise, use Phoenix Tuner X (downloads also available online):
+
+1. Navigate to Log Extractor.
+2. Download the log named with only capital letters and numbers.
+3. Select the signals `TalonFX-CAN_ID/MotorVoltage`, `.../Position`, and `.../Velocity`, as well as the one named `state`.
+4. Export in the `wpilog` format to Downloads.
+
+More information: <https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tools/log-extractor.html>
+
+## Analysis
+
+Open the SysId app (included in the WPILib suite), and use it to load the wpilog file you've downloaded. Drag & Drop the state signal, then the signals from the motor from the top left corner to the corresponding labels in the bottom left corner. Select the correct units (Phoenix Tuner X *always* uses rotations), and press the button to analyze the results.
+
+![SysId Analysis Results](https://docs.wpilib.org/en/stable/_images/feedforward-values.png)
+
+Before adding these values to your code, set the "Gain Preset" to the most applicable type of feedback controller and change the "Loop Type" to the type of feedback control you are using.
+
+More information: <https://docs.wpilib.org/en/stable/docs/software/advanced-controls/system-identification/analyzing-gains.html>
+
+## Usage in code
+
+Add the PID and Feedforward constants to the motor configuration, then use position control to command the motor to move to an angle.
+
+```kotlin
+class ElevatorIOTalon : ElevatorIO {
+    private val motor = TalonFX().apply {
+        // Configure motion control:
+        Slot0.apply {
+            pidGains = PIDGains(kP, 0.0, kD)
+            motorFFGains = MotorFFGains(kS, kV, kA)
+            // Optionally also set the gravity gain here for pivots and elevators:
+            // kG = 123.4
+            // GravityType = GravityTypeValue.Elevator_Static
+        }
+
+        MotionMagic.apply {
+            MotionMagicCruiseVelocity = PROFILE_VELOCITY
+            MotionMagicAcceleration = PROFILE_ACCELERATION
+            MotionMagicJerk = PROFILE_JERK
+        }
+
+        // Make sure to also set brake mode, current limits, and the gear ratio to acceptable values.
+    }
+
+    private var positionControl = MotionMagicVoltage(0.0).apply {
+        EnableFOC = true
+    }
+
+    override fun setDesiredPosition(position: Angle) {
+        motor.setControl(positionControl.withOutput(position))
+    }
+
+    // For a linear system, you might want to accept a linear distance and then convert it like this:
+    // override fun setDesiredPosition(position: Distance) {
+    //     val angularPosition = position.toAngular(WHEEL_RADIUS)
+    //     motor.setControl(positionControl.withOutput(angularPosition))
+    // }
+}
+```
+
+Motion Magic documentation: <https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/motion-magic.html>

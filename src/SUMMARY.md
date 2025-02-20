@@ -10,4 +10,5 @@
   - [Commands and Subsystems](./wpilib/commands-and-subsystems.md)
   - [Applied Command-Based Programming](./wpilib/commands-applied.md)
   - [Simulation](./wpilib/simulation.md)
+- [SysID Tutorial](./sysid.md)
 - [Auto Language](./drivelang/README.md)
